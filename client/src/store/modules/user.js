@@ -1,28 +1,35 @@
 const state = {
   user: {},
-  isLoggedIn: !!localStorage.getItem('token'),
+  isLoggedIn: false,
   token: ''
 };
 
 const getters = {
-  
+  isLoggedIn: state => state.isLoggedIn,
+  user: state => state.user
 };
 
 const mutations = {
-  'SIGN_UP'(state, user) {
-    state.user = user;
-    state.token = user.token;
+  'SIGN_UP'(state, userPayload) {
+    state.user = userPayload.user;
+    state.token = userPayload.token;
     state.isLoggedIn = true;
   },
-  'SIGN_IN'(state, user) {
-    state.user = user;
-    state.token = user.token;
+  'SIGN_IN'(state, userPayload) {
+    state.user = userPayload.user;
+    state.token = userPayload.token;
     state.isLoggedIn = true;
   },
   'SIGN_OUT'(state) {
     state.user = {};
     state.token = '';
     state.isLoggedIn = false;
+  },
+  'UPDATE_INFO'(state, userPayload) {
+    state.user = userPayload.user;
+  },
+  'RESET_PASSWORD'(state, userPayload) {
+    state.user = userPayload.user;
   }
 };
 
@@ -35,6 +42,13 @@ const actions = {
   },
   signOut({ commit }) {
     commit('SIGN_OUT');
+    
+  },
+  updateInfo({ commit }, userPayload) {
+    commit('UPDATE_INFO', userPayload);
+  },
+  resetPassword({ commit }, userPayload) {
+    commit('RESET_PASSWORD', userPayload);
   }
 };
 

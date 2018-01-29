@@ -6,5 +6,12 @@ export default {
   },
   signIn(user) {
     return api().post('user/signin', user)
+  },
+  updateInfo(user) {
+    const config = { headers: { 'Content-Type': 'multipart/form-data' }}
+    return api().put('user/updateInfo', user, config)
+  },
+  resetPassword(user) {
+    return api().put('user/resetPassword', user);
   }
 }

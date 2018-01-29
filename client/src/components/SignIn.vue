@@ -1,37 +1,38 @@
 <template>
   <v-layout class="mt-4">
-      <v-flex xs12 offset-xs0 sm4 offset-sm4>
+      <v-flex xs12 offset-xs0 sm4 offset-sm4 class="elevation-2">
         <v-alert outline color="error" icon="warning" :value="err">
           {{ err }}
         </v-alert>
         <v-card dark color="primary">
-          <v-card-text>Sign In</v-card-text>
+          <v-card-text class="headline">Sign In</v-card-text>
         </v-card>
-        <v-form>
-          <v-text-field
-            label="Email"
-            :rules="emailRules"
-            v-model="user.email"
-            required
-          >
-          </v-text-field>
-          <v-text-field
-            label="Password"
-            type="password"
-            :rules="passwordRules"
-            v-model="user.password"
-            required
-          >
-          </v-text-field>
-          <v-btn color="primary" @click="signIn()">Sign In</v-btn>
-        </v-form>
+        <div class="white pa-4">
+          <v-form @submit.prevent="signIn($event)" ref="form">
+            <v-text-field
+              label="Email"
+              :rules="emailRules"
+              v-model.trim="user.email"
+              required
+            >
+            </v-text-field>
+            <v-text-field
+              label="Password"
+              type="password"
+              :rules="passwordRules"
+              v-model.trim="user.password"
+              required
+            >
+            </v-text-field>
+            <v-btn class="mt4" color="primary" type="submit">Sign In</v-btn>
+          </v-form>
+        </div>
       </v-flex>
   </v-layout>
 </template>
 
 <script>
 import userService from '@/services/userService.js'
-import { store } from '@/store/store'
 
 const emailRegEx = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 export default {
@@ -52,22 +53,18 @@ export default {
     }
   },
   methods: {
-    async signIn() {
-      try {
-        const user = (await userService.signIn(this.user)).data;
-        this.$store.dispatch('signIn', user);
-        localStorage.setItem('token', user.token);
-        this.$router.push('/');
-      } catch(err) {
-        this.err = err.response.data.message;
+    async signIn(e) {
+      if(this.user.email && this.user.password) {
+        try {
+          const user = (await userService.signIn(this.user)).data;
+          this.$store.dispatch('signIn', user);
+          this.$router.push('/');
+        } catch(err) {
+          this.err = err.response.data.message;
+        }
+      } else {
+        this.$refs.form.validate();
       }
-    }
-  },
-  beforeRouteEnter(to, from, next) {
-    if(!store.state.user.isLoggedIn) {
-      next();
-    } else {
-      next(false);
     }
   }
 }

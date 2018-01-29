@@ -1,7 +1,22 @@
 import axios from 'axios'
+import { store } from '@/store/store'
 
 export default () => {
-  return axios.create({
-    baseURL: 'http://localhost:8081/'
+
+  const api = axios.create({
+    baseURL: 'http://localhost:8081/',
+    headers: {
+      Authorization: `Bearer ${store.state.user.token}`
+    }
   })
+
+  api.interceptors.response.use(response => response,
+  error => {
+    if(error.response.status === 401) {
+      store.dispatch('signOut');
+    }
+    return Promise.reject(error);
+  });
+
+  return api
 }

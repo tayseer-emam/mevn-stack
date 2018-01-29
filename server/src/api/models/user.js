@@ -11,7 +11,9 @@ const userSchema = mongoose.Schema({
     unique: true,
     match: EMAIL_VALIDATOR
   },
-  password: { type: String }
+  name: { type: String, required: true },
+  password: { type: String, required: true },
+  image: { type: String }
 });
 
 module.exports = mongoose.model('User', userSchema);
