@@ -1,6 +1,6 @@
 <template>
   <v-toolbar color="warning">
-    <v-toolbar-title>Title</v-toolbar-title>
+    <router-link tag="v-toolbar-title" to="/">Title</router-link>
     <v-spacer></v-spacer>
     <v-toolbar-side-icon class="hidden-md-and-up"></v-toolbar-side-icon>
     <v-toolbar-items class="hidden-sm-and-down">

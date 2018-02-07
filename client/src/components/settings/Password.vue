@@ -27,13 +27,6 @@
       </v-text-field>
       <v-btn color="primary" type="submit">Reset Password</v-btn>
     </v-form>
-    <v-snackbar 
-      :color="message.color"
-      :timeout="6000"
-      v-model="message.show"
-    >
-     {{ message.text }}
-    </v-snackbar>
   </div>
 </template>
 
@@ -52,12 +45,7 @@ export default {
       },
       passwordRules: [
         (v) => !!v || 'This field is required'
-      ],
-      message: {
-        show: false,
-        color: '',
-        text: null
-      }
+      ]
     }
   },
   created() {
@@ -67,14 +55,10 @@ export default {
     async resetPassword() {
       if(this.userData.oldPassword && this.userData.newPassword && this.userData.newMatchPassword) {
         try {
-          const res = (await userService.resetPassword(this.userData)).data;
-          this.message.text = res.message;
-          this.message.show = true;
-          this.message.color = 'green';
-        } catch (error) {
-          this.message.text = error.response.data.message;
-          this.message.show = true;
-          this.message.color = 'red';
+          const res = await userService.resetPassword(this.userData);
+          this.$store.dispatch('showMessage', {text: res.message});
+        } catch (err) {
+          this.$store.dispatch('showMessage', {text: err.message, color: 'red'});
         }
       } else {
         this.$refs.form.validate();

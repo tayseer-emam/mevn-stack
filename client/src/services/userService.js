@@ -13,5 +13,8 @@ export default {
   },
   resetPassword(user) {
     return api().put('user/resetPassword', user);
+  },
+  checkAuth(user) {
+    return api().get('user/checkAuth', user);
   }
 }

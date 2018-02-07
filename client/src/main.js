@@ -6,10 +6,20 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import { store } from '@/store/store'
- 
+require('cropperjs/dist/cropper.min.css')
+
 Vue.use(Vuetify)
 
 Vue.config.productionTip = false
+
+router.beforeEach((to, from, next) => {
+  store.dispatch('startProgress');
+  next();
+});
+
+router.afterEach((to, from) => {
+  store.dispatch('stopProgress');
+});
 
 /* eslint-disable no-new */
 new Vue({

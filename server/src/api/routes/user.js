@@ -22,5 +22,8 @@ router.post('/signup', userController.signup);
 router.post('/signin', userController.signin);
 router.put('/resetPassword', checkAuth, userController.resetPassword);
 router.put('/updateInfo', upload.single('image'), checkAuth, userController.updateInfo);
+router.get('/checkAuth', checkAuth, (req, res, next) => {
+  res.json({message: 'ok'});
+});
 
 module.exports = router;

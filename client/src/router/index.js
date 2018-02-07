@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home.vue'
-import SignUp from '@/components/SignUp.vue'
-import SignIn from '@/components/SignIn.vue'
-import Settings from '@/components/settings/Settings.vue'
-import PersonalInfo from '@/components/settings/PersonalInfo.vue'
-import Password from '@/components/settings/Password.vue'
 import { ifNotAuth, ifAuth } from './router-auth'
+
+const Home = () => import('@/components/Home.vue');
+const SignUp = () => import('@/components/SignUp.vue');
+const SignIn = () => import('@/components/SignIn.vue');
+const Settings = () => import('@/components/settings/Settings.vue');
+const PersonalInfo = () => import('@/components/settings/PersonalInfo.vue');
+const Password = () => import('@/components/settings/Password.vue');
 
 Vue.use(Router)
 
@@ -32,12 +33,12 @@ export default new Router({
     },
     {
       path: '/settings',
-      name: 'settings',
       component: Settings,
       beforeEnter: ifAuth,
       children: [
         {
           path: '',
+          name: 'settings',
           component: PersonalInfo
         },
         {

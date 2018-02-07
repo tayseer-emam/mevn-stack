@@ -56,7 +56,7 @@ export default {
     async signIn(e) {
       if(this.user.email && this.user.password) {
         try {
-          const user = (await userService.signIn(this.user)).data;
+          const user = await userService.signIn(this.user);
           this.$store.dispatch('signIn', user);
           this.$router.push('/');
         } catch(err) {

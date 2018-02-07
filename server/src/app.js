@@ -1,12 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const config = require('./config/config');
 
 const app = express();
 
 const api = require('./api/api');
 
-mongoose.connect('mongodb://localhost/mevn');
+mongoose.connect(config.db);
 let db = mongoose.connection;
 
 db.once('open', () => {

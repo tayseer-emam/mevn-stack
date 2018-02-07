@@ -67,7 +67,7 @@ export default {
     async signUp(e) {
       if(this.user.name && this.user.password && this.user.email) {
         try {
-          const user = (await userService.signUp(this.user)).data;
+          const user = await userService.signUp(this.user);
           this.$store.dispatch('signUp', user);
           this.$router.push('/');
         } catch(err) {

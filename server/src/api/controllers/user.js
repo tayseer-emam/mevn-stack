@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const config = require('../../config/config');
 
 const User = require('../models/user');
 
@@ -9,9 +10,8 @@ function jwtSign(user) {
     _id: user._id,
     email: user.email
   },
-  'secret', {
-    expiresIn: '1d'
-  });
+  config.authentication.jwtSecretKey,
+  { expiresIn: config.authentication.jwtExpiration });
 }
 
 module.exports = {

@@ -1,3 +1,5 @@
+import router from '@/router/index'
+
 const state = {
   user: {},
   isLoggedIn: false,
@@ -42,7 +44,7 @@ const actions = {
   },
   signOut({ commit }) {
     commit('SIGN_OUT');
-    
+    router.push('/login');
   },
   updateInfo({ commit }, userPayload) {
     commit('UPDATE_INFO', userPayload);

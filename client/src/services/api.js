@@ -10,12 +10,13 @@ export default () => {
     }
   })
 
-  api.interceptors.response.use(response => response,
-  error => {
-    if(error.response.status === 401) {
-      store.dispatch('signOut');
-    }
-    return Promise.reject(error);
+  api.interceptors.response.use(
+    response => response.data,
+    error => {
+      if(error.response.status === 401) {
+        store.dispatch('signOut');
+      }
+      return Promise.reject(error.response.data);
   });
 
   return api
