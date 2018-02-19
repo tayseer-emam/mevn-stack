@@ -5,8 +5,8 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import 'cropperjs/dist/cropper.min.css'
 import { store } from '@/store/store'
-require('cropperjs/dist/cropper.min.css')
 
 Vue.use(Vuetify)
 

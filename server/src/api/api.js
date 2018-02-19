@@ -6,5 +6,6 @@ router.get('/', (req, res) => {
 });
 
 router.use('/user', require('./routes/user'));
+router.use('/post', require('./routes/post'));
 
 module.exports = router;

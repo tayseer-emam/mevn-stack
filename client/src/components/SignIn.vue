@@ -60,7 +60,7 @@ export default {
           this.$store.dispatch('signIn', user);
           this.$router.push('/');
         } catch(err) {
-          this.err = err.response.data.message;
+          this.err = err.message;
         }
       } else {
         this.$refs.form.validate();

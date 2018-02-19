@@ -8,6 +8,8 @@ const SignIn = () => import('@/components/SignIn.vue');
 const Settings = () => import('@/components/settings/Settings.vue');
 const PersonalInfo = () => import('@/components/settings/PersonalInfo.vue');
 const Password = () => import('@/components/settings/Password.vue');
+const Post = () => import('@/components/Post.vue');
+const PostView = () => import('@/components/PostView.vue');
 
 Vue.use(Router)
 
@@ -47,5 +49,16 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/new-post',
+      component: Post,
+      beforeEnter: ifAuth
+    },
+    {
+      path: '/post/:id',
+      name: 'post-view',
+      component: PostView,
+      beforeEnter: ifAuth
+    }
   ]
 })

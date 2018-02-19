@@ -1,6 +1,9 @@
 <template>
   <v-toolbar color="warning">
-    <router-link tag="v-toolbar-title" to="/">Title</router-link>
+    <router-link tag="v-toolbar-title" to="/" class="mr-4">Title</router-link>
+    <v-toolbar-items>
+      <router-link v-if="isLoggedIn" tag="v-btn" to="/new-post" class="btn--flat">New Post</router-link>
+    </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-side-icon class="hidden-md-and-up"></v-toolbar-side-icon>
     <v-toolbar-items class="hidden-sm-and-down">
@@ -72,5 +75,8 @@ export default {
 }
 .list > li:first-child {
   border-bottom: 1px solid #ccc;
+}
+.router-link-exact-active {
+  color: #4169e1;
 }
 </style>
