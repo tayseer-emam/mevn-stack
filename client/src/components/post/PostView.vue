@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>{{ post.title }}</h1>
-    <p>{{ post.body }}</p>
+    <h1 class="mb-4 display-2">{{ post.title }}</h1>
+    <blockquote class="blockquote post-body">{{ post.body }}</blockquote>
   </div>
 </template>
 
@@ -26,4 +26,7 @@ export default {
 </script>
 
 <style scoped>
+.post-body {
+  white-space: pre-line;
+}
 </style>

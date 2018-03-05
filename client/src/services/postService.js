@@ -9,5 +9,8 @@ export default {
   },
   getPost(id) {
     return api().get(`/post/${id}`);
+  },
+  editPost(post) {
+    return api().put(`/post`, post);
   }
 }

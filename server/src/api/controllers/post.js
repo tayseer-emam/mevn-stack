@@ -38,7 +38,7 @@ module.exports = {
     try {
       const post = await Post.findOne(query);
       if(!post) {
-        return res.status(403).json({
+        return res.status(404).json({
           message: 'Can\'t Find This Post'
         });
       } else {
@@ -46,7 +46,32 @@ module.exports = {
       }
     } catch (error) {
       res.status(500).json({
-        message: 'Can\'t Find This Post'
+        message: 'An error occurred'
+      });
+    }
+  },
+  async updatePost(req, res) {
+    const query = { _id: req.body._id };
+    const fields = {
+      title: req.body.title,
+      body: req.body.body
+    }
+    try {
+      const post = await Post.findOneAndUpdate(query, fields, { new: true });
+      console.log(post);
+      if(!post) {
+        return res.status(404).json({
+          message: 'Can\'t Find This Post'
+        });
+      } else {
+        res.status(200).json({
+          post,
+          message: 'Post Updated successfully'
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        message: 'An error occurred'
       });
     }
   }

@@ -6,5 +6,6 @@ const postController = require('../controllers/post');
 router.post('/', checkAuth, postController.create);
 router.get('/', postController.getPosts);
 router.get('/:id', postController.getPost);
+router.put('/', checkAuth, postController.updatePost);
 
 module.exports = router;

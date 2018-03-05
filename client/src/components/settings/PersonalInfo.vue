@@ -2,11 +2,11 @@
   <div>
     <v-form class="pa-4" @submit.prevent="updateInfo($event)" ref="form">
       <div class="text-xs-center">
-        <v-avatar :class="{'teal': userInfo.imageSrc === null}" size="200px" @click="$refs.file.click()">
+        <v-avatar :class="{'teal': !userInfo.imageSrc}" size="200px" @click="$refs.file.click()">
           <div class="avatar-overlay">
             <v-icon dark>photo_camera</v-icon>
           </div>
-          <span v-if="userInfo.imageSrc === null && !user.image" class="white--text display-3">{{ userChar }}</span>
+          <span v-if="!userInfo.imageSrc && !user.image" class="white--text display-3">{{ userChar }}</span>
           <img v-else-if="userInfo.imageSrc" :src="userInfo.imageSrc" alt="">
           <img v-else :src="user.image" alt="">
         </v-avatar>
